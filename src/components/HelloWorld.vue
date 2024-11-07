@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, ref} from 'vue'
+import {computed, ref, watch} from 'vue'
 
 defineProps<{ msg: string }>()
 
@@ -27,13 +27,18 @@ const nestedObj = ref<{nested: Record<string,string>}>({nested:{}});
 
 
 console.log(`in HelloWorld <script>`)
+
+const btnRef = ref<HTMLButtonElement|undefined>(undefined);
+watch([btnRef], ([btn]) => {
+  console.log(`btn html: ${btn?.innerHTML}`);
+})
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
 
   <div class="card">
-    <button type="button" @click="count++">count is {{ count }} => squarred: {{squarred}}</button>
+    <button ref="btnRef" type="button" @click="count++">count is {{ count }} => squarred: {{squarred}}</button>
     {{test.value}}
     {{arr.length}}
     {{Object.keys(obj).length}}
