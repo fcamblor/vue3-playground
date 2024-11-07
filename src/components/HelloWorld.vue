@@ -9,8 +9,8 @@ defineProps<{ msg: string }>()
   <h1>{{ msg }}</h1>
 
   <div class="card">
-    <counter />
-    <counter />
+    <counter :initialValue="1" />
+    <counter :initialValue="2" />
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR

@@ -5,7 +5,10 @@
 <script setup lang="ts">
 import {ref} from "vue";
 
-const count = ref(0)
+const props = defineProps({
+  initialValue: Number
+})
+const count = ref(props.initialValue)
 </script>
 
 <style scoped>
