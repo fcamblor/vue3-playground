@@ -59,7 +59,9 @@ watch([count], ([count]) => {
     <p>Count is {{count % 2===0?'even':'odd'}}</p>
     <p v-if="count % 2 === 0">EVEN !!</p>
     <ul>
-      <li v-for="(val, index) in arr" :key="index">{{val}}</li>
+      <li v-for="(val, index) in arr" :key="index">
+        {{val}} <slot name="arr-value" :val="val" ></slot>
+      </li>
     </ul>
   </div>
 

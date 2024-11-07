@@ -11,7 +11,11 @@ import HelloWorld from './components/HelloWorld.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <HelloWorld msg="Vite + Vue" @even-detected="console.log(`count from App: ${$event}`)" />
+  <HelloWorld msg="Vite + Vue" @even-detected="console.log(`count from App: ${$event}`)">
+    <template #arr-value="{ val }">
+      (size: {{val.length}})
+    </template>
+  </HelloWorld>
 </template>
 
 <style scoped>
