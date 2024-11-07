@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import Counter from "./Counter.vue";
+import {ref} from "vue";
 
 defineProps<{ msg: string }>()
+
+const count = ref(0)
 
 </script>
 
@@ -9,8 +12,8 @@ defineProps<{ msg: string }>()
   <h1>{{ msg }}</h1>
 
   <div class="card">
-    <counter :initialValue="1" />
-    <counter :initialValue="2" />
+    <counter :value="count" @on-count-updated="count++" />
+    <counter :value="count" @on-count-updated="count++" />
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR

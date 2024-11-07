@@ -1,14 +1,15 @@
 <template>
-  <button type="button" @click="count++">count is {{ count }}</button>
+  <button type="button" @click="emits('on-increment-clicked', value || 42)">count is {{ value }}</button>
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
 
 const props = defineProps({
-  initialValue: Number
+  value: Number
 })
-const count = ref(props.initialValue)
+const emits = defineEmits<{
+  (event: 'on-increment-clicked', currentValue: number): void
+}>()
 </script>
 
 <style scoped>
