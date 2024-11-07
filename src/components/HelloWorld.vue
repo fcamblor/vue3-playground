@@ -47,6 +47,11 @@ watch([btnRef], ([btn]) => {
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
     </p>
+    <p>Count is {{count % 2===0?'even':'odd'}}</p>
+    <p v-if="count % 2 === 0">EVEN !!</p>
+    <ul>
+      <li v-for="(val, index) in arr" :key="index">{{val}}</li>
+    </ul>
   </div>
 
   <p>
