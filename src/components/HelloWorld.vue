@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Counter from "./Counter.vue";
 import {ref} from "vue";
+import Pokemons from "./Pokemons.vue";
 
 defineProps<{ msg: string }>()
 
@@ -15,6 +16,7 @@ const deferredCountUpdated = (_: number) => {
   <h1>{{ msg }}</h1>
 
   <div class="card">
+    <Pokemons />
     <counter :value="count" @on-increment-clicked="(_) => count++" />
     <counter :value="count" @on-increment-clicked="deferredCountUpdated" />
     <p>
