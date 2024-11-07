@@ -3,6 +3,10 @@ import {computed, ref, watch} from 'vue'
 
 defineProps<{ msg: string }>()
 
+const emits = defineEmits<{
+  (e: 'even-detected', count: number): void,
+}>()
+
 
 const count = ref(0);
 (window as any).count = count;
@@ -31,6 +35,11 @@ console.log(`in HelloWorld <script>`)
 const btnRef = ref<HTMLButtonElement|undefined>(undefined);
 watch([btnRef], ([btn]) => {
   console.log(`btn html: ${btn?.innerHTML}`);
+})
+watch([count], ([count]) => {
+  if(count % 2 === 0) {
+    emits('even-detected', count)
+  }
 })
 </script>
 
