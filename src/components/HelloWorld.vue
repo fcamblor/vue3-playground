@@ -6,14 +6,17 @@ defineProps<{ msg: string }>()
 
 const count = ref(0)
 
+const deferredCountUpdated = (_: number) => {
+  setTimeout(() => count.value += 1000, 2000)
+}
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
 
   <div class="card">
-    <counter :value="count" @on-count-updated="count++" />
-    <counter :value="count" @on-count-updated="count++" />
+    <counter :value="count" @on-increment-clicked="(_) => count++" />
+    <counter :value="count" @on-increment-clicked="deferredCountUpdated" />
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
