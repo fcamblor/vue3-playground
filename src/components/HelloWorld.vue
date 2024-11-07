@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, ref, watch} from 'vue'
+import {computed, onMounted, ref, watch} from 'vue'
 
 defineProps<{ msg: string }>()
 
@@ -31,6 +31,10 @@ const nestedObj = ref<{nested: Record<string,string>}>({nested:{}});
 
 
 console.log(`in HelloWorld <script>`)
+
+onMounted(() => {
+  console.log(`HelloWorld mounted`)
+})
 
 const btnRef = ref<HTMLButtonElement|undefined>(undefined);
 watch([btnRef], ([btn]) => {
