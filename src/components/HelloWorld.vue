@@ -1,16 +1,58 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import {computed, ref, toRef, toValue, watch} from 'vue'
+import Counter from "./Counter.vue";
+import LongLoadingComponent from "./LongLoadingComponent.vue";
 
 defineProps<{ msg: string }>()
+console.log('in HelloWorld')
+const countRef = ref(0);
+(window as any).count = countRef;
 
-const count = ref(0)
+const squarred = computed(() => {
+  const value = toValue(countRef);
+
+  console.log('in squarred computing')
+  return value * value;
+})
+
+const dateRef = ref(new Date())
+setInterval(() => {
+  dateRef.value = new Date()
+}, 1000)
+
+watch([countRef, dateRef], ([count, date]) => {
+  console.log(`count/date updated: ${count} ${date.toISOString()}`)
+}, {immediate: true})
+
+function increment() {
+  console.log('increment')
+  countRef.value++;
+}
+function deferredIncrement() {
+  setTimeout(() =>
+    countRef.value += 1000,
+    2000)
+}
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
 
   <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
+    <Counter @increment="increment()" :value="countRef">
+      <template #blah="{ count }">
+        <span style="color: red">Hello {{count}}</span>
+      </template>
+    </Counter>
+    <Counter @increment="deferredIncrement()" :value="countRef" />
+    <LongLoadingComponent />
+
+    <ul>
+      <li v-for="(value, index) in [1,2,3,4]" :key="value">{{value}}</li>
+    </ul>
+
+
+    {{ squarred }} | {{ dateRef.toISOString() }}
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
